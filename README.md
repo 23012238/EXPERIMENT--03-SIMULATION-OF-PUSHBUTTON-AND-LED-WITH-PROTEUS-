@@ -1,6 +1,11 @@
 # EXPERIMENT--03-SIMULATION-OF-PUSHBUTTON-AND-LED INTERFACE WITH ARM CONTROLLER AND PROTEUS 
-## Aim: To Interface a Digital output (LED) and Digital input (Pushbutton) to ARM development board , and simulate it in Proteus 
-## Components required: STM32 CUBE IDE, Proteus 8 simulator .
+
+## Aim: 
+To Interface a Digital output (LED) and Digital input (Pushbutton) to ARM development board , and simulate it in Proteus 
+
+## Components required: 
+STM32 CUBE IDE, Proteus 8 simulator .
+
 ## Theory 
 The full form of an ARM is an advanced reduced instruction set computer (RISC) machine, and it is a 32-bit processor architecture expanded by ARM holdings. The applications of an ARM processor include several microcontrollers as well as processors. The architecture of an ARM processor was licensed by many corporations for designing ARM processor-based SoC products and CPUs. This allows the corporations to manufacture their products using ARM architecture. Likewise, all main semiconductor companies will make ARM-based SOCs such as Samsung, Atmel, TI etc.
 
@@ -72,19 +77,51 @@ We are now at the last part of step by step guide on how to simulate STM32 proje
 
 ## STM 32 CUBE PROGRAM :
 
+```
+#include "main.h"
+#include <stdbool.h>
+
+bool button_status;
+
+void push_button();
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+
+int main(void)
+{
+  HAL_Init();
+  SystemClock_Config();
+  MX_GPIO_Init();
+
+  while (1)
+  {
+	  push_button();
+}
+
+void push_button()
+{
+	button_status = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13);
+	if(button_status==0)
+	{
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_SET);
+	}
+	else
+	{
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_RESET);
+	}
+}
+```
 
 
 
 ## Output screen shots of proteus  :
 
+<img width="1358" height="951" alt="open" src="https://github.com/user-attachments/assets/14cc5906-a616-43bf-84b3-7ed8ef9b1c02" />
+
+<img width="1347" height="946" alt="close" src="https://github.com/user-attachments/assets/4e679517-9f6a-4239-a816-bc3a78cda524" />
 
 
 
-## Proteus layout(Add pdf screen shot of circuit here)
- 
- 
- 
- 
 ## Result :
 Interfacing a digital output and digital input  with ARM microcontroller are simulated in proteus and the results are verified.
 
